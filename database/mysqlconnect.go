@@ -21,7 +21,7 @@ func Dbconnect() *gorm.DB {
 	// dbDatabase := config.GetEnv("DB_DATABASE")
 	// socket := config.GetEnv("DB_SOCKET")
 
-	// db, err := gorm.Open("mysql", dbUser+":"+dbPassword+"@unix("+socket+")/"+dbDatabase+"?parseTime=True") //localhost
+	// DB, err := gorm.Open("mysql", dbUser+":"+dbPassword+"@unix("+socket+")/"+dbDatabase+"?parseTime=True") //localhost
 
 	//postgree
 	var err error
@@ -37,7 +37,7 @@ func Dbconnect() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Database connected!")
+
 	return DB
 }
 
