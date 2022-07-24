@@ -6,7 +6,6 @@ import (
 	"go-clean/present"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/jinzhu/gorm"
 )
 
 func GetAll(c *fiber.Ctx) error {
@@ -43,8 +42,7 @@ func Save(c *fiber.Ctx) error {
 		return c.Status(503).Send([]byte(err.Error()))
 	}
 
-	dbs := &gorm.DB{}
-	if validateIfExist(dbs, data.Name) == true {
+	if validateIfExist(data.Name) == true {
 		db.Create(&data)
 		return c.JSON(present.Success("Success", data, nil))
 	} else {
@@ -95,8 +93,9 @@ func Delete(c *fiber.Ctx) error {
 	return c.JSON(present.Success("Delete Product Success", nil, nil))
 }
 
-func validateIfExist(db *gorm.DB, productName string) bool {
+func validateIfExist(productName string) bool {
 	var tmp models.Product
+	db := database.Dbconnect()
 	err := db.Table("product").Where("name = ?", productName).First(&tmp)
 
 	if err.RowsAffected == 0 {
