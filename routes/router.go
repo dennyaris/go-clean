@@ -25,7 +25,12 @@ func RouterInit(r *fiber.App) {
 	p.Put("/:id", controller.UpdateById)
 	p.Delete("/:id", controller.Delete)
 
-	appList := r.Listen(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+
+	appList := r.Listen(":" + port)
 	if appList != nil {
 		log.Println("fail to listen go fiber server")
 		os.Exit(1)
