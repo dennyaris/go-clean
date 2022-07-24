@@ -27,7 +27,10 @@ func GetById(c *fiber.Ctx) error {
 
 	prodId := c.Params("id")
 	db := database.Dbconnect()
-	db.Find(&data, prodId)
+	if err := db.Find(&data, prodId); err != nil {
+		c.Status(400)
+		return c.JSON(present.Error("Data not found", nil))
+	}
 
 	return c.JSON(present.Success("Success", data, nil))
 }
