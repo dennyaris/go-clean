@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	// "github.com/jinzhu/gorm"
@@ -23,8 +24,14 @@ func Dbconnect() *gorm.DB {
 
 	//postgree
 	var err error
-	const POSTGREESQL = "postgres://wzclpugyoxjxuk:59121310f6e4cfc0e832a864a3319873f0fabe074b5362bb7cc89ba15bf3d4a6@ec2-54-208-104-27.compute-1.amazonaws.com:5432/d919ovmafh5m6f"
-	dsn := POSTGREESQL
+
+	database_url := os.Getenv("DATABASE_URL")
+
+	if database_url == "" {
+		database_url = "postgresql://postgres:@localhost:5432/go_clean?ssl_mode=disable&TimeZone=Asia/Jakarta"
+	}
+
+	dsn := database_url
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
