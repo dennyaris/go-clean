@@ -43,7 +43,8 @@ func Save(c *fiber.Ctx) error {
 		return c.Status(503).Send([]byte(err.Error()))
 	}
 
-	if validateIfExist(db, data.Name) == true {
+	dbs := &gorm.DB{}
+	if validateIfExist(dbs, data.Name) == true {
 		db.Create(&data)
 		return c.JSON(present.Success("Success", data, nil))
 	} else {
