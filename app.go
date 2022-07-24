@@ -11,7 +11,8 @@ import (
 func main() {
 	_ = os.Setenv("TZ", "Asia/Jakarta")
 
-	database.Dbconnect()
+	db := database.Dbconnect()
+	database.RunMigrate(db)
 
 	app := fiber.New()
 	routes.RouterInit(app)

@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"go-clean/models"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -38,4 +39,10 @@ func Dbconnect() *gorm.DB {
 	}
 	fmt.Println("Database connected!")
 	return DB
+}
+
+func RunMigrate(db *gorm.DB) {
+	db.AutoMigrate(&models.Product{})
+
+	fmt.Println("Database migrated")
 }
