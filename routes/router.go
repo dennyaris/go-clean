@@ -2,6 +2,8 @@ package routes
 
 import (
 	"go-clean/controller"
+	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -23,5 +25,9 @@ func RouterInit(r *fiber.App) {
 	p.Put("/:id", controller.UpdateById)
 	p.Delete("/:id", controller.Delete)
 
-	_ = r.Listen(":90")
+	appList := r.Listen(":8080")
+	if appList != nil {
+		log.Println("fail to listen go fiber server")
+		os.Exit(1)
+	}
 }

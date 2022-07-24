@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Product struct {
-	Id          int       `json:"id"`
+	Id          uint      `json:"id"`
 	Name        string    `json:"name" form:"name"`
 	Description string    `json:"description" form:"description"`
 	CreatedAt   time.Time `json:"created_at" gorm:"type:TIMESTAMP(6)"`
