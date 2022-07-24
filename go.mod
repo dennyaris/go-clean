@@ -1,3 +1,4 @@
+// +heroku goVersion go1.16
 module go-clean
 
 go 1.16
