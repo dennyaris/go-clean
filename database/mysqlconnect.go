@@ -23,7 +23,7 @@ func Dbconnect() *gorm.DB {
 
 	//postgree
 	var err error
-	const POSTGREESQL = "postgres://fptywazsibmxxb:4328999b1a1643b930c87d201fd7db3926a30f2b1c29f59eb6816ae5ad37c93e@ec2-44-199-143-43.compute-1.amazonaws.com:5432/d82o9n2p4hum9k"
+	const POSTGREESQL = "postgres://wzclpugyoxjxuk:59121310f6e4cfc0e832a864a3319873f0fabe074b5362bb7cc89ba15bf3d4a6@ec2-54-208-104-27.compute-1.amazonaws.com:5432/d919ovmafh5m6f"
 	dsn := POSTGREESQL
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
